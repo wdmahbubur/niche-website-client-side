@@ -18,9 +18,9 @@ const Banner = () => {
             }} navigation={true} className="mySwiper">
                 <SwiperSlide>
                     <Container>
-                        <Grid container spacing={2} sx={{ py: 10 }}>
-                            <Grid item xs={6} sx={{ textAlign: 'left' }}>
-                                <Typography variant="h1" sx={{ fontWeight: '500', color: 'text.secondary' }}>
+                        <Grid container spacing={2} sx={{ py: { xs: 3, md: 10 }, rowGap: 2, }}>
+                            <Grid item md={6} sx={{ textAlign: 'left', order: { xs: 2, md: 1 } }}>
+                                <Typography variant="h1" sx={{ fontWeight: '500', color: 'text.secondary', fontSize: { xs: 60, md: 100 } }}>
                                     BuzzBee<br />
                                     Nano Drone
                                 </Typography>
@@ -29,7 +29,7 @@ const Banner = () => {
                                 </Typography>
                                 <Button variant="outlined" sx={{ mt: 4 }}>Shop Now</Button>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item md={6} sx={{ order: { xs: 1, md: 2 } }}>
                                 <img src="https://i.ibb.co/m5ss3dF/inner-product-06-1200x640.png" alt="" />
                             </Grid>
                         </Grid>
@@ -37,9 +37,9 @@ const Banner = () => {
                 </SwiperSlide>
                 <SwiperSlide>
                     <Container>
-                        <Grid container spacing={2} sx={{ py: 10 }}>
-                            <Grid item xs={6} sx={{ textAlign: 'left' }}>
-                                <Typography variant="h1" sx={{ fontWeight: '500', color: 'text.secondary' }}>
+                        <Grid container spacing={2} sx={{ py: { xs: 3, md: 10 }, rowGap: 2, }}>
+                            <Grid item md={6} sx={{ textAlign: 'left', order: { xs: 2, md: 1 } }}>
+                                <Typography variant="h1" sx={{ fontWeight: '500', color: 'text.secondary', fontSize: { xs: 60, md: 100 } }}>
                                     Elomus F18 <br />
                                     Drone 3 Auto
                                 </Typography>
@@ -48,7 +48,7 @@ const Banner = () => {
                                 </Typography>
                                 <Button variant="outlined" sx={{ mt: 4 }}>Shop Now</Button>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item md={6} sx={{ order: { xs: 1, md: 2 } }}>
                                 <img src="https://i.ibb.co/Xyc4kXf/img-static2-elomus1.jpg" alt="" />
                             </Grid>
                         </Grid>
@@ -56,9 +56,9 @@ const Banner = () => {
                 </SwiperSlide>
                 <SwiperSlide>
                     <Container>
-                        <Grid container spacing={2} sx={{ py: 10 }}>
-                            <Grid item xs={6} sx={{ textAlign: 'left' }}>
-                                <Typography variant="h2" sx={{ fontWeight: '600', color: 'text.secondary' }}>
+                        <Grid container spacing={2} sx={{ py: { xs: 3, md: 10 }, rowGap: 2, }}>
+                            <Grid item md={6} sx={{ textAlign: 'left', order: { xs: 2, md: 1 } }}>
+                                <Typography variant="h2" sx={{ fontWeight: '500', color: 'text.secondary', fontSize: { xs: 40, md: 70 } }}>
                                     Many Great Ways<br />
                                     To Use Drones
                                 </Typography>
@@ -67,7 +67,7 @@ const Banner = () => {
                                 </Typography>
                                 <Button variant="outlined" sx={{ mt: 4 }}>More Info</Button>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item md={6} sx={{ order: { xs: 1, md: 2 } }}>
                                 <img src="https://i.ibb.co/NjqXqMc/dron-landing-1-copyright.png" alt="" />
                             </Grid>
                         </Grid>
