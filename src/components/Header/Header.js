@@ -114,6 +114,20 @@ const Header = () => {
                             </Typography>
 
                             <Typography sx={{ mx: 2 }}>Hi! Mahbubur Rahaman</Typography>
+                            <Typography sx={{ mx: 2 }}>
+                                <Link smooth as={NavHashLink} to="/dashboard"
+                                    sx={{
+                                        minWidth: 100,
+                                        color: '#fff',
+                                        textDecoration: 'none',
+                                        fontWeight: 500,
+                                        fontSize: 18,
+                                        transition: 'all .4s linear',
+                                        ":hover": {
+                                            color: '#d1d1d1'
+                                        }
+                                    }}>Dashboard</Link>
+                            </Typography>
                             <Button variant="outlined"
                                 sx={{
                                     color: '#fff',

@@ -20,6 +20,9 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import PaymentIcon from '@mui/icons-material/Payment';
 import LogoutIcon from '@mui/icons-material/Logout';
+import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
+import LocalMallIcon from '@mui/icons-material/LocalMall';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 const drawerWidth = 240;
 
@@ -71,6 +74,36 @@ function Dashboard(props) {
                     <ListItemText primary="Review" />
                 </ListItem>
 
+            </List>
+            <Divider />
+            <List>
+                <ListItem button as={NavLink} to="manage-all-orders" sx={{ color: 'GrayText' }}>
+                    <ListItemIcon>
+                        <ShoppingCartIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Manage All Order" />
+                </ListItem>
+
+                <ListItem button as={NavLink} to="manage-products" sx={{ color: 'GrayText' }}>
+                    <ListItemIcon>
+                        <LocalMallIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Manage Products" />
+                </ListItem>
+
+                <ListItem button as={NavLink} to="add-new-products" sx={{ color: 'GrayText' }}>
+                    <ListItemIcon>
+                        <AddShoppingCartIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Add New Product" />
+                </ListItem>
+
+                <ListItem button as={NavLink} to="make-new-admin" sx={{ color: 'GrayText' }}>
+                    <ListItemIcon>
+                        <SupervisedUserCircleIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Make New Admin" />
+                </ListItem>
             </List>
             <Divider />
             <List>

@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
+import { useState } from 'react';
 import Dashboard from './components/pages/Dashboard/Dashboard';
 import Explore from './components/pages/Explore/Explore';
 import Home from './components/pages/Home/Home';
@@ -11,7 +12,10 @@ import DashboardHome from './components/pages/Dashboard/DashboardHome/DashboardH
 import MyOrders from './components/pages/Dashboard/User/MyOrders/MyOrders';
 import Pay from './components/pages/Dashboard/User/Pay/Pay';
 import Review from './components/pages/Dashboard/User/Review/Review';
-import { useState } from 'react';
+import ManageAllOrder from './components/pages/Dashboard/Admin/ManageAllOrders/ManageAllOrders';
+import ManageProducts from './components/pages/Dashboard/Admin/ManageProducts/ManageProducts';
+import AddNewProduct from './components/pages/Dashboard/Admin/AddNewProduct/AddNewProduct';
+import MakeNewAdmin from './components/pages/Dashboard/Admin/MakeNewAdmin/MakeNewAdmin';
 
 
 function App() {
@@ -33,6 +37,11 @@ function App() {
             <Route path="my-orders" element={<MyOrders setPage={setPage} />} />
             <Route path="pay" element={<Pay setPage={setPage} />} />
             <Route path="review" element={<Review setPage={setPage} />} />
+            <Route path="manage-all-orders" element={<ManageAllOrder setPage={setPage} />} />
+            <Route path="manage-products" element={<ManageProducts setPage={setPage} />} />
+            <Route path="add-new-products" element={<AddNewProduct setPage={setPage} />} />
+            <Route path="make-new-admin" element={<MakeNewAdmin setPage={setPage} />} />
+
           </Route>
 
         </Routes>
