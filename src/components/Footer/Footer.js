@@ -9,7 +9,7 @@ const Footer = () => {
         <Box sx={{ bgcolor: 'info.main', py: 5 }}>
             <Container>
                 <Grid container spacing={2}>
-                    <Grid item md={3}>
+                    <Grid item xs={12} md={3}>
                         <Typography variant="h4" component="div" sx={{ fontWeight: 700 }}>
                             <Link as={NavLink} to="/" sx={{ color: '#fff', textDecoration: 'none' }}>
                                 DroneBazar
@@ -22,11 +22,11 @@ const Footer = () => {
                             info@DroneBazar.com<br />
                         </Typography>
                     </Grid>
-                    <Grid item md={3}>
-                        <Typography variant="h6" component="div" sx={{ color: '#fff', fontWeight: 700, ml: 5 }}>
+                    <Grid item xs={12} md={3}>
+                        <Typography variant="h6" component="div" sx={{ color: '#fff', fontWeight: 700, ml: { xs: 0, md: 5 } }}>
                             Our Latest Drone
                         </Typography>
-                        <List sx={{ mt: 2, color: '#ddd', ml: 5 }}>
+                        <List sx={{ mt: 2, color: '#ddd', ml: { xs: 0, md: 5 } }}>
                             <ListItem sx={{ pl: 0, py: .5 }}>
                                 <ListItemText sx={{ my: 0 }}>
                                     <Link as={NavLink} to="/"
@@ -77,11 +77,11 @@ const Footer = () => {
                             </ListItem>
                         </List>
                     </Grid>
-                    <Grid item md={3}>
-                        <Typography variant="h6" component="div" sx={{ color: '#fff', fontWeight: 700, ml: 5 }}>
+                    <Grid item xs={12} md={3}>
+                        <Typography variant="h6" component="div" sx={{ color: '#fff', fontWeight: 700, ml: { xs: 0, md: 5 } }}>
                             Links
                         </Typography>
-                        <List sx={{ mt: 2, color: '#ddd', ml: 5 }}>
+                        <List sx={{ mt: 2, color: '#ddd', ml: { xs: 0, md: 5 } }}>
                             <ListItem sx={{ pl: 0, py: .5 }}>
                                 <ListItemText sx={{ my: 0 }}>
                                     <Link smooth as={NavHashLink} to="/#home"
@@ -148,7 +148,7 @@ const Footer = () => {
                             </ListItem>
                         </List>
                     </Grid>
-                    <Grid item md={3}>
+                    <Grid item xs={12} md={3}>
                         <Typography variant="h6" component="div" sx={{ color: '#fff', fontWeight: 700 }}>
                             Newsletter
                         </Typography>
