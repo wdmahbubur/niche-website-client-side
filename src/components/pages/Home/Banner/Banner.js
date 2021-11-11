@@ -9,9 +9,9 @@ SwiperCore.use([Autoplay, Pagination, Navigation]);
 
 const Banner = () => {
     return (
-        <Box id="home" sx={{ mt: 4 }}>
+        <Box id="home" sx={{ mt: { xs: 10, md: 4 } }}>
             <Swiper spaceBetween={30} centeredSlides={true} autoplay={{
-                "delay": 10000,
+                "delay": 3000,
                 "disableOnInteraction": false
             }} pagination={{
                 "clickable": true

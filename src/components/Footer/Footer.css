@@ -1,9 +1,9 @@
-.css-1pysi21-MuiFormLabel-root-MuiInputLabel-root,
-.css-1kty9di-MuiFormLabel-root-MuiInputLabel-root.Mui-focused,
-.css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input {
+.email-subscribe .css-1pysi21-MuiFormLabel-root-MuiInputLabel-root,
+.email-subscribe .css-1kty9di-MuiFormLabel-root-MuiInputLabel-root.Mui-focused,
+.email-subscribe .css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input {
     color: #fff !important;
 }
-.css-md26zr-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline,
-.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+.email-subscribe .css-md26zr-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline,
+.email-subscribe .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
     border-color: #fff !important;
 }

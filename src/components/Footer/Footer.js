@@ -146,13 +146,29 @@ const Footer = () => {
                                         }}>Review</Link>
                                 </ListItemText>
                             </ListItem>
+                            <ListItem sx={{ pl: 0, py: .5 }}>
+                                <ListItemText sx={{ my: 0 }}>
+                                    <Link smooth as={NavHashLink} to="/#contact"
+                                        sx={{
+                                            minWidth: 100,
+                                            color: '#fff',
+                                            textDecoration: 'none',
+                                            fontWeight: 500,
+                                            fontSize: 16,
+                                            transition: 'all .4s linear',
+                                            ":hover": {
+                                                color: '#d1d1d1'
+                                            }
+                                        }}>Contact</Link>
+                                </ListItemText>
+                            </ListItem>
                         </List>
                     </Grid>
                     <Grid item xs={12} md={3}>
                         <Typography variant="h6" component="div" sx={{ color: '#fff', fontWeight: 700 }}>
                             Newsletter
                         </Typography>
-                        <form style={{ marginTop: 16, color: '#fff' }}>
+                        <form style={{ marginTop: 16, color: '#fff' }} className="email-subscribe">
                             <TextField id="email-basic" fullWidth label="Email" variant="outlined" size="small" sx={{ color: '#fff' }} />
                             <Button variant="outlined" sx={{
                                 mt: 3,

@@ -12,6 +12,7 @@ import { Link, MenuItem, MenuList, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import Logout from '@mui/icons-material/Logout';
 import './Drawer.css'
+import { NavHashLink } from 'react-router-hash-link';
 export default function TemporaryDrawer({ toggleDrawer, drawer }) {
 
     console.log(drawer)
@@ -31,13 +32,15 @@ export default function TemporaryDrawer({ toggleDrawer, drawer }) {
                 >
                     <MenuList>
                         <MenuItem>
-                            <Link as={NavLink} to="/"
+                            <Link smooth as={NavHashLink} to="/#home"
                                 sx={{
                                     color: '#000000DE',
                                     textDecoration: 'none',
                                     fontWeight: 500,
                                     fontSize: 16,
-                                    ml: 1
+                                    ml: 1,
+                                    display: 'block',
+                                    width: 1
                                 }}>Home</Link>
                         </MenuItem>
                         <MenuItem>
@@ -47,12 +50,50 @@ export default function TemporaryDrawer({ toggleDrawer, drawer }) {
                                     textDecoration: 'none',
                                     fontWeight: 500,
                                     fontSize: 16,
-                                    ml: 1
+                                    ml: 1,
+                                    display: 'block',
+                                    width: 1
                                 }}>Explore</Link>
+                        </MenuItem>
+                        <MenuItem>
+                            <Link smooth as={NavHashLink} to="/#latestProducts"
+                                sx={{
+                                    color: '#000000DE',
+                                    textDecoration: 'none',
+                                    fontWeight: 500,
+                                    fontSize: 16,
+                                    ml: 1,
+                                    display: 'block',
+                                    width: 1
+                                }}>Latest Products</Link>
+                        </MenuItem>
+                        <MenuItem>
+                            <Link smooth as={NavHashLink} to="/#review"
+                                sx={{
+                                    color: '#000000DE',
+                                    textDecoration: 'none',
+                                    fontWeight: 500,
+                                    fontSize: 16,
+                                    ml: 1,
+                                    display: 'block',
+                                    width: 1
+                                }}>Review</Link>
+                        </MenuItem>
+                        <MenuItem>
+                            <Link smooth as={NavHashLink} to="/#contact"
+                                sx={{
+                                    color: '#000000DE',
+                                    textDecoration: 'none',
+                                    fontWeight: 500,
+                                    fontSize: 16,
+                                    ml: 1,
+                                    display: 'block',
+                                    width: 1
+                                }}>Contact</Link>
                         </MenuItem>
                         <Divider />
                         <MenuItem>
-                            <Link as={NavLink} to="/explore"
+                            <Link as={NavLink} to="/"
                                 sx={{
                                     color: 'error.main',
                                     textDecoration: 'none',
