@@ -5,15 +5,16 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import LoginIcon from '@mui/icons-material/Login';
 import Logout from '@mui/icons-material/Logout'
 import { Button, Container, Link } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import TemporaryDrawer from './Drawer/Drawer';
 import { NavHashLink } from 'react-router-hash-link';
 
 const Header = () => {
     const [drawer, setDrawer] = React.useState(false);
-
+    let navigate = useNavigate();
     const toggleDrawer = () => {
         if (drawer) {
             setDrawer(false);
@@ -21,6 +22,10 @@ const Header = () => {
             setDrawer(true)
         }
 
+    }
+
+    const goToLogin = () => {
+        navigate('/login', { replace: true })
     }
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -115,12 +120,25 @@ const Header = () => {
                                     borderColor: '#fff',
                                     ml: 3,
                                     ":hover": {
+                                        backgroundColor: 'success.main'
+                                    }
+                                }}
+                                onClick={goToLogin}
+                            >
+                                <LoginIcon fontSize="small" sx={{ mr: .5 }} /> Login
+                            </Button>
+                            {/* <Button variant="outlined"
+                                sx={{
+                                    color: '#fff',
+                                    borderColor: '#fff',
+                                    ml: 3,
+                                    ":hover": {
                                         backgroundColor: 'error.main'
                                     }
 
                                 }}>
-                                <Logout fontSize="small" /> Logout
-                            </Button>
+                                <Logout fontSize="small" sx={{ mr: .5 }} /> Logout
+                            </Button> */}
 
                         </Box>
 
