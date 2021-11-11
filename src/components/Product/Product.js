@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Card, CardMedia, CardContent, CardActions, Button, Typography } from '@mui/material';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 const Product = () => {
     return (
         <Grid item xs={12} md={6} lg={4}>
@@ -19,7 +20,7 @@ const Product = () => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" variant="outlined">Order Now</Button>
+                    <Button size="small" variant="outlined"><ShoppingCartIcon />Order Now</Button>
                 </CardActions>
             </Card>
         </Grid>

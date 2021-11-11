@@ -1,10 +1,11 @@
-import { Box, Container, Grid, Paper, Typography, TextField, Button, Divider, Link } from '@mui/material';
+import { Box, Container, Grid, Paper, Typography, TextField, Button, Divider, Link, Toolbar } from '@mui/material';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Login = () => {
     return (
-        <Box sx={{ my: 10 }}>
+        <Box sx={{ mb: 10 }}>
+            <Toolbar />
             <Container>
                 <Grid container spacing={2} sx={{ alignItems: 'center' }}>
                     <Grid item md={6}>

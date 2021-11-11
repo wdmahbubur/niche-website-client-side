@@ -1,11 +1,12 @@
-import { Container, Box, Typography, Grid, Card, CardMedia, CardContent, CardActions, Button, } from '@mui/material';
+import { Container, Box, Typography, Grid, Pagination } from '@mui/material';
 import React from 'react';
 import Product from '../../Product/Product';
+import './Explore.css';
 
 const Explore = () => {
     return (
-        <div>
-            <Container sx={{ py: 5 }}>
+        <Box sx={{ pb: 5 }}>
+            <Container>
                 <Box sx={{ my: 5, color: "info.main", textAlign: 'center' }}>
                     <Typography variant="h3" sx={{ fontWeight: 600, fontSize: { xs: 30 } }}>
                         Explore More Drone
@@ -25,8 +26,11 @@ const Explore = () => {
                         <Product />
                     </Grid>
                 </Box>
+                <Box sx={{ my: 4 }}>
+                    <Pagination count={5} />
+                </Box>
             </Container>
-        </div>
+        </Box>
     );
 };
 

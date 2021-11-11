@@ -1,9 +1,10 @@
-import { Box, Container, Grid, Paper, Typography, TextField, Button, Link, Divider } from '@mui/material';
+import { Box, Container, Grid, Paper, Typography, TextField, Button, Link, Divider, Toolbar } from '@mui/material';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 const Register = () => {
     return (
         <Box sx={{ my: 10 }}>
+            <Toolbar />
             <Container>
                 <Grid container spacing={2} sx={{ alignItems: 'center' }}>
                     <Grid item md={6}>
