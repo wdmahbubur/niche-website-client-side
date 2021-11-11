@@ -9,6 +9,7 @@ import Logout from '@mui/icons-material/Logout'
 import { Button, Container, Link } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import TemporaryDrawer from './Drawer/Drawer';
+import { NavHashLink } from 'react-router-hash-link';
 
 const Header = () => {
     const [drawer, setDrawer] = React.useState(false);
@@ -23,7 +24,7 @@ const Header = () => {
     }
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="sticky">
+            <AppBar position="fixed">
                 <Container maxWidth="lg" sx={{ px: { xs: 0 } }}>
                     <Toolbar>
                         <Typography variant="h5" component="div" sx={{ flexGrow: 1, fontWeight: 700 }}>
@@ -32,8 +33,8 @@ const Header = () => {
                             </Link>
                         </Typography>
                         <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', textAlign: 'center' }}>
-                            <Typography sx={{ minWidth: 100 }}>
-                                <Link as={NavLink} to="/"
+                            <Typography sx={{ mx: 2 }}>
+                                <Link smooth as={NavHashLink} to="/#home"
                                     sx={{
                                         minWidth: 100,
                                         color: '#fff',
@@ -46,7 +47,8 @@ const Header = () => {
                                         }
                                     }}>Home</Link>
                             </Typography>
-                            <Typography sx={{ minWidth: 100 }}>
+
+                            <Typography sx={{ mx: 2 }}>
                                 <Link as={NavLink} to="/explore"
                                     sx={{
                                         minWidth: 100,
@@ -61,7 +63,37 @@ const Header = () => {
                                     }}>Explore</Link>
                             </Typography>
 
-                            <Typography sx={{ minWidth: 100 }}>Hi! Mahbubur Rahaman</Typography>
+                            <Typography sx={{ mx: 2 }}>
+                                <Link smooth as={NavHashLink} to="/#latestProducts"
+                                    sx={{
+                                        minWidth: 100,
+                                        color: '#fff',
+                                        textDecoration: 'none',
+                                        fontWeight: 500,
+                                        fontSize: 18,
+                                        transition: 'all .4s linear',
+                                        ":hover": {
+                                            color: '#d1d1d1'
+                                        }
+                                    }}>Latest Drone</Link>
+                            </Typography>
+
+                            <Typography sx={{ mx: 2 }}>
+                                <Link smooth as={NavHashLink} to="/#review"
+                                    sx={{
+                                        minWidth: 100,
+                                        color: '#fff',
+                                        textDecoration: 'none',
+                                        fontWeight: 500,
+                                        fontSize: 18,
+                                        transition: 'all .4s linear',
+                                        ":hover": {
+                                            color: '#d1d1d1'
+                                        }
+                                    }}>Review</Link>
+                            </Typography>
+
+                            <Typography sx={{ mx: 2 }}>Hi! Mahbubur Rahaman</Typography>
                             <Button variant="outlined"
                                 sx={{
                                     color: '#fff',
