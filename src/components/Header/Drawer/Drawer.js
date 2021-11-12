@@ -7,8 +7,10 @@ import { NavLink } from 'react-router-dom';
 import Logout from '@mui/icons-material/Logout';
 import './Drawer.css'
 import { NavHashLink } from 'react-router-hash-link';
+import useAuth from '../../../hooks/useAuth';
+import { Login } from '@mui/icons-material';
 export default function TemporaryDrawer({ toggleDrawer, drawer }) {
-
+    const { user, logout } = useAuth();
     return (
         <React.Fragment>
             <Drawer
@@ -85,18 +87,51 @@ export default function TemporaryDrawer({ toggleDrawer, drawer }) {
                                 }}>Contact</Link>
                         </MenuItem>
                         <Divider />
-                        <MenuItem>
-                            <Link as={NavLink} to="/"
-                                sx={{
+                        {
+                            user?.email ? <>
+                                <MenuItem>
+                                    <Link as={NavLink} to="/dashboard"
+                                        sx={{
+                                            color: '#000000DE',
+                                            textDecoration: 'none',
+                                            fontWeight: 500,
+                                            fontSize: 16,
+                                            ml: 1,
+                                            display: 'block',
+                                            width: 1
+                                        }}>Dashboard</Link>
+                                </MenuItem>
+                                <MenuItem sx={{
                                     color: 'error.main',
                                     textDecoration: 'none',
                                     fontWeight: 500,
                                     fontSize: 16,
                                     ml: 1
-                                }}>
-                                <Logout sx={{ fontSize: '18px' }} /> Logout
-                            </Link>
-                        </MenuItem>
+                                }}
+                                    button onClick={logout}
+                                >
+
+
+                                    <Logout sx={{ fontSize: '18px' }} /> Logout
+
+                                </MenuItem>
+                            </>
+                                :
+                                <MenuItem>
+                                    <Link as={NavLink} to="/login"
+                                        sx={{
+                                            color: '#000000DE',
+                                            textDecoration: 'none',
+                                            fontWeight: 500,
+                                            fontSize: 16,
+                                            ml: 1,
+                                            display: 'block',
+                                            width: 1
+                                        }}>
+                                        <Login sx={{ fontSize: '18px' }} /> Login</Link>
+                                </MenuItem>
+                        }
+
                     </MenuList>
                 </Box>
             </Drawer>

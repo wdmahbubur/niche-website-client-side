@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Alert, Snackbar } from '@mui/material';
+import { Box, Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Alert, Snackbar, TableCell } from '@mui/material';
 import useAuth from '../../../../../hooks/useAuth';
 import axios from 'axios';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
@@ -18,11 +18,15 @@ const MyOrders = ({ setPage }) => {
 
     useEffect(() => {
         setPage("My Oder's")
+
+    }, [setPage])
+
+    useEffect(() => {
         setLoading(true);
-        axios.get(`http://localhost:5000/orders?uid=${user.uid}`)
+        axios.get(`http://localhost:5000/orders/${user.uid}`)
             .then(res => setOrders(res.data))
             .finally(() => setLoading(false))
-    }, [setPage, user.uid, success])
+    }, [user.uid, success])
 
     const confirmDialog = (id) => {
         setCancelOrder(id);
@@ -51,26 +55,26 @@ const MyOrders = ({ setPage }) => {
             <Paper sx={{ p: 4 }}>
                 <Table>
                     <Thead>
-                        <Tr style={{ textAlign: 'left' }}>
-                            <Th>#</Th>
-                            <Th>Name</Th>
-                            <Th>Product</Th>
-                            <Th>Order Date</Th>
-                            <Th>Total Cost</Th>
-                            <Th>Status</Th>
-                            <Th>Action</Th>
+                        <Tr>
+                            <TableCell as={Th}>#</TableCell>
+                            <TableCell as={Th}>Name</TableCell>
+                            <TableCell as={Th}>Product</TableCell>
+                            <TableCell as={Th}>Order Date</TableCell>
+                            <TableCell as={Th}>Total Cost</TableCell>
+                            <TableCell as={Th}>Status</TableCell>
+                            <TableCell as={Th}>Action</TableCell>
                         </Tr>
                     </Thead>
                     <Tbody>
                         {orders.map((order) => (
                             <Tr key={order._id}>
-                                <Td>{count++}</Td>
-                                <Td>{order.name}</Td>
-                                <Td>{order.productName}</Td>
-                                <Td>{order.date}</Td>
-                                <Td >{order.totalCost}</Td>
-                                <Td >{order.status}</Td>
-                                <Td><Button variant="contained" color="error" onClick={() => confirmDialog(order._id)} sx={{ my: 1 }}>Cancel</Button></Td>
+                                <TableCell as={Td}>{count++}</TableCell>
+                                <TableCell as={Td}>{order.name}</TableCell>
+                                <TableCell as={Td}>{order.productName}</TableCell>
+                                <TableCell as={Td}>{order.date}</TableCell>
+                                <TableCell as={Td}>{order.totalCost}</TableCell>
+                                <TableCell as={Td}>{order.status}</TableCell>
+                                <TableCell as={Td}><Button variant="contained" color="error" onClick={() => confirmDialog(order._id)}>Cancel</Button></TableCell>
                             </Tr>
                         ))}
                     </Tbody>

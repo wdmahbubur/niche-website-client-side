@@ -19,11 +19,20 @@ const DashboardHome = ({ setPage }) => {
 
     useEffect(() => {
         setPage("Dashboard");
+    }, [setPage]);
+
+    useEffect(() => {
         setLoading(true);
-        axios.get(`http://localhost:5000/orders?uid=${user.uid}`)
-            .then(res => setOrders(res.data))
-            .finally(() => setLoading(false))
-    }, [setPage, user.uid]);
+        if (user.role === "admin") {
+            axios.get(`http://localhost:5000/orders`)
+                .then(res => setOrders(res.data))
+                .finally(() => setLoading(false))
+        } else {
+            axios.get(`http://localhost:5000/orders/${user.uid}`)
+                .then(res => setOrders(res.data))
+                .finally(() => setLoading(false))
+        }
+    }, [user.uid, user.role])
 
     return (
         <Box>
@@ -89,12 +98,12 @@ const DashboardHome = ({ setPage }) => {
 
                             <Table>
                                 <Thead>
-                                    <Tr style={{ textAlign: 'left' }}>
-                                        <Th>#</Th>
-                                        <Th>Name</Th>
-                                        <Th>Product</Th>
-                                        <Th>Total Cost</Th>
-                                        <Th>Status</Th>
+                                    <Tr>
+                                        <TableCell as={Th}>#</TableCell>
+                                        <TableCell as={Th}>Name</TableCell>
+                                        <TableCell as={Th}>Product</TableCell>
+                                        <TableCell as={Th}>Total Cost</TableCell>
+                                        <TableCell as={Th}>Status</TableCell>
                                     </Tr>
                                 </Thead>
                                 <Tbody>

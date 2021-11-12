@@ -1,4 +1,4 @@
-import { Container, Box, Typography, Grid, Pagination } from '@mui/material';
+import { Container, Box, Typography, Grid } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Loading from '../../Loading/Loading';
@@ -36,9 +36,7 @@ const Explore = () => {
 
                     </Grid>
                 </Box>
-                {/* <Box sx={{ my: 4 }}>
-                    <Pagination count={5} />
-                </Box> */}
+
             </Container>
         </Box>
     );

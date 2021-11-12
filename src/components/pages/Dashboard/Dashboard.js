@@ -24,13 +24,14 @@ import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import useAuth from '../../../hooks/useAuth'
+import StoreIcon from '@mui/icons-material/Store';
 
 const drawerWidth = 240;
 
 function Dashboard(props) {
     const { window, page } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -55,6 +56,12 @@ function Dashboard(props) {
 
                 {
                     user.role === "user" ? <>
+                        <ListItem button as={NavLink} to="/explore" sx={{ color: 'GrayText' }}>
+                            <ListItemIcon>
+                                <StoreIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Explore" />
+                        </ListItem>
                         <ListItem button as={NavLink} to="my-orders" sx={{ color: 'GrayText' }}>
                             <ListItemIcon>
                                 <ShoppingCartIcon />
@@ -112,11 +119,11 @@ function Dashboard(props) {
 
             <Divider />
             <List>
-                <ListItem button >
+                <ListItem button onClick={logout}>
                     <ListItemIcon>
                         <LogoutIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Logout" />
+                    <ListItemText primary="Logout" sx={{ color: 'error.main' }} />
                 </ListItem>
             </List>
         </div>

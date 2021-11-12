@@ -1,58 +1,121 @@
-import React, { useEffect } from 'react';
-import { Box, TableContainer, Table, Paper, TableHead, TableRow, TableCell, TableBody, Button } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Alert, Snackbar, TableCell, TableContainer } from '@mui/material';
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
+import axios from 'axios';
+import Loading from '../../../../Loading/Loading';
 
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 const MakeNewAdmin = ({ setPage }) => {
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [error, setError] = useState(false);
+    const [admin, setAdmin] = useState();
+    const [dialog, setDialog] = useState(false);
+
     useEffect(() => {
         setPage("Add New Admin")
     }, [setPage])
+
+    useEffect(() => {
+        setLoading(true);
+        axios.get('http://localhost:5000/users')
+            .then(res => {
+                if (res.data) {
+                    setUsers(res.data);
+                }
+            }).finally(() => setLoading(false));
+    }, [success])
+
     let count = 1;
-    const handleRole = () => {
-        const confirm = window.confirm("Are you sure? cancel this order")
+
+    const confirmDialog = (id) => {
+        setAdmin(id);
+        setDialog(true);
+    }
+    const confirmAdmin = () => {
+        setDialog(false);
+        setSuccess(false);
+        setError(false);
+        setLoading(true);
+        axios.put(`http://localhost:5000/users/admin/${admin}`)
+            .then(res => {
+                if (res) {
+                    setSuccess(true);
+                }
+            }).catch(error => {
+                setError(true);
+            }).finally(() => setLoading(false))
+
     }
     return (
         <Box>
+            {
+                loading && <Loading />
+            }
             <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>#</TableCell>
-                            <TableCell>Full Name</TableCell>
-                            <TableCell>Product Name</TableCell>
-                            <TableCell>Order Date</TableCell>
-                            <TableCell>Status</TableCell>
-                            <TableCell>Action</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map((row) => (
-                            <TableRow
-                                key={row.name}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            >
-                                <TableCell>{count++}</TableCell>
-                                <TableCell>{row.name}</TableCell>
-                                <TableCell>{row.calories}</TableCell>
-                                <TableCell >{row.fat}</TableCell>
-                                <TableCell >{row.carbs}</TableCell>
+                <Table>
+                    <Thead>
+                        <Tr >
+                            <TableCell as={Th}>#</TableCell>
+                            <TableCell as={Th}>Name</TableCell>
+                            <TableCell as={Th}>Email</TableCell>
+                            <TableCell as={Th}>Role</TableCell>
+                            <TableCell as={Th}>Make Admin</TableCell>
+                        </Tr>
+                    </Thead>
+                    <Tbody>
+                        {users.map((user) => (
+                            <Tr key={user._id}>
+                                <TableCell as={Td}>{count++}</TableCell>
+                                <TableCell as={Td} >{user.name}</TableCell>
+                                <TableCell as={Td}>{user.email}</TableCell>
+                                <TableCell as={Td} >{user.role}</TableCell>
                                 <TableCell>
-                                    <Button variant="contained" color="success" onClick={handleRole}>Make Admin</Button>
+                                    {
+                                        user.role !== "admin" && < Button variant="contained" color="success" onClick={() => confirmDialog(user._id)}>Make Admin</Button>
+                                    }
+
                                 </TableCell>
-                            </TableRow>
+                            </Tr>
                         ))}
-                    </TableBody>
+                    </Tbody>
                 </Table>
             </TableContainer>
+            <Dialog
+                open={dialog}
+                onClose={() => setDialog(false)}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"Cancel Order?"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Are you sure? make this admin
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setDialog(false)}>No</Button>
+                    <Button onClick={confirmAdmin} variant="contained" sx={{ bgcolor: 'error.main' }}>
+                        Yes
+                    </Button>
+                </DialogActions>
+            </Dialog>
+            {
+                success && <Snackbar open={true} autoHideDuration={6000} onClose={() => setSuccess(false)}>
+                    <Alert onClose={() => setSuccess(false)} severity="success" sx={{ width: '100%' }}>
+                        Successfully Make New Admin
+                    </Alert>
+                </Snackbar>
+            }
+            {
+                error && <Snackbar open={true} autoHideDuration={6000} onClose={() => setError(false)}>
+                    <Alert onClose={() => setError(false)} severity="error" sx={{ width: '100%' }}>
+                        An error occurred!
+                    </Alert>
+                </Snackbar>
+            }
         </Box >
     );
 };
