@@ -13,7 +13,7 @@ import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { Link } from '@mui/material';
+import { Avatar, Link, Tooltip } from '@mui/material';
 import { NavLink, Outlet } from 'react-router-dom';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -23,18 +23,18 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import useAuth from '../../../hooks/useAuth'
 
 const drawerWidth = 240;
 
 function Dashboard(props) {
-    const { window } = props;
-    const { page } = props;
+    const { window, page } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const { user } = useAuth();
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
-
     const drawer = (
         <div>
             <Toolbar>
@@ -53,58 +53,63 @@ function Dashboard(props) {
                     <ListItemText primary="Dashboard" />
                 </ListItem>
 
-                <ListItem button as={NavLink} to="my-orders" sx={{ color: 'GrayText' }}>
-                    <ListItemIcon>
-                        <ShoppingCartIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="My Orders" />
-                </ListItem>
+                {
+                    user.role === "user" ? <>
+                        <ListItem button as={NavLink} to="my-orders" sx={{ color: 'GrayText' }}>
+                            <ListItemIcon>
+                                <ShoppingCartIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="My Orders" />
+                        </ListItem>
 
-                <ListItem button as={NavLink} to="pay" sx={{ color: 'GrayText' }}>
-                    <ListItemIcon>
-                        <PaymentIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Pay" />
-                </ListItem>
+                        <ListItem button as={NavLink} to="pay" sx={{ color: 'GrayText' }}>
+                            <ListItemIcon>
+                                <PaymentIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Pay" />
+                        </ListItem>
 
-                <ListItem button as={NavLink} to="review" sx={{ color: 'GrayText' }}>
-                    <ListItemIcon>
-                        <RateReviewIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Review" />
-                </ListItem>
+                        <ListItem button as={NavLink} to="review" sx={{ color: 'GrayText' }}>
+                            <ListItemIcon>
+                                <RateReviewIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Review" />
+                        </ListItem>
+                    </>
+                        :
+                        <>
+                            <ListItem button as={NavLink} to="manage-all-orders" sx={{ color: 'GrayText' }}>
+                                <ListItemIcon>
+                                    <ShoppingCartIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Manage All Order" />
+                            </ListItem>
+
+                            <ListItem button as={NavLink} to="manage-products" sx={{ color: 'GrayText' }}>
+                                <ListItemIcon>
+                                    <LocalMallIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Manage Products" />
+                            </ListItem>
+
+                            <ListItem button as={NavLink} to="add-new-products" sx={{ color: 'GrayText' }}>
+                                <ListItemIcon>
+                                    <AddShoppingCartIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Add New Product" />
+                            </ListItem>
+
+                            <ListItem button as={NavLink} to="make-new-admin" sx={{ color: 'GrayText' }}>
+                                <ListItemIcon>
+                                    <SupervisedUserCircleIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Make New Admin" />
+                            </ListItem>
+                        </>
+                }
 
             </List>
-            <Divider />
-            <List>
-                <ListItem button as={NavLink} to="manage-all-orders" sx={{ color: 'GrayText' }}>
-                    <ListItemIcon>
-                        <ShoppingCartIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Manage All Order" />
-                </ListItem>
 
-                <ListItem button as={NavLink} to="manage-products" sx={{ color: 'GrayText' }}>
-                    <ListItemIcon>
-                        <LocalMallIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Manage Products" />
-                </ListItem>
-
-                <ListItem button as={NavLink} to="add-new-products" sx={{ color: 'GrayText' }}>
-                    <ListItemIcon>
-                        <AddShoppingCartIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Add New Product" />
-                </ListItem>
-
-                <ListItem button as={NavLink} to="make-new-admin" sx={{ color: 'GrayText' }}>
-                    <ListItemIcon>
-                        <SupervisedUserCircleIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Make New Admin" />
-                </ListItem>
-            </List>
             <Divider />
             <List>
                 <ListItem button >
@@ -129,7 +134,7 @@ function Dashboard(props) {
                     ml: { sm: `${drawerWidth}px` },
                 }}
             >
-                <Toolbar>
+                <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -142,6 +147,15 @@ function Dashboard(props) {
                     <Typography variant="h6" noWrap component="div">
                         {page}
                     </Typography>
+                    <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+                        <Tooltip title={user.displayName} >
+                            <IconButton size="small" sx={{ ml: 2, color: '#fff' }}>
+                                <Avatar sx={{ width: 32, height: 32, mr: 1 }}><img src={user.photoURL || 'https://i.ibb.co/rFcCHMw/test.jpg'} alt="" style={{ width: '100%' }} /></Avatar>
+
+                                {user.displayName}
+                            </IconButton>
+                        </Tooltip>
+                    </Box>
                 </Toolbar>
             </AppBar>
             <Box

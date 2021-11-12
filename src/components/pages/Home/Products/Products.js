@@ -1,8 +1,22 @@
-import { Container, Box, Typography, Grid, Card, CardMedia, CardContent, CardActions, Button } from '@mui/material';
-import React from 'react';
+import { Container, Box, Typography, Grid } from '@mui/material';
 import Product from '../../../Product/Product';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Loading from '../../../Loading/Loading';
+
 
 const Products = () => {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        setLoading(true);
+        axios.get('http://localhost:5000/products?size=6')
+            .then(res => {
+                setProducts(res.data)
+                setLoading(false);
+            })
+    }, [])
     return (
         <Box id="latestProducts">
             <Container sx={{ py: 5 }}>
@@ -14,14 +28,15 @@ const Products = () => {
                 </Box>
                 <Box sx={{ pt: 5 }}>
                     <Grid container spacing={2} sx={{ rowGap: 4 }}>
-                        <Product />
-                        <Product />
-                        <Product />
-                        <Product />
-                        <Product />
+                        {
+                            products.map(product => <Product key={product._id} product={product} />)
+                        }
                     </Grid>
                 </Box>
             </Container>
+            {
+                loading && <Loading />
+            }
         </Box>
     );
 };

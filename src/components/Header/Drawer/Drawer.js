@@ -9,7 +9,6 @@ import './Drawer.css'
 import { NavHashLink } from 'react-router-hash-link';
 export default function TemporaryDrawer({ toggleDrawer, drawer }) {
 
-    console.log(drawer)
     return (
         <React.Fragment>
             <Drawer

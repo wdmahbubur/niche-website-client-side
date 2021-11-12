@@ -1,84 +1,116 @@
-import React, { useEffect } from 'react';
-import { Box, Paper, Grid, Button } from '@mui/material';
-import Calender from '../../../../Calender/Calender';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import React, { useEffect, useState } from 'react';
+import { Box, Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Alert, Snackbar } from '@mui/material';
+import useAuth from '../../../../../hooks/useAuth';
+import axios from 'axios';
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
+import Loading from '../../../../Loading/Loading';
 
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 const MyOrders = ({ setPage }) => {
-    const today = new Date();
-    const [date, setDate] = React.useState(today);
+    const { user } = useAuth();
+    const [orders, setOrders] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [cancelOrder, setCancelOrder] = useState();
+    const [dialog, setDialog] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [error, setError] = useState(false);
+    let count = 1;
+
     useEffect(() => {
         setPage("My Oder's")
-    }, [setPage])
+        setLoading(true);
+        axios.get(`http://localhost:5000/orders?uid=${user.uid}`)
+            .then(res => setOrders(res.data))
+            .finally(() => setLoading(false))
+    }, [setPage, user.uid, success])
 
-    let count = 1;
-    const cancelOrder = () => {
-        const confirm = window.confirm("Are you sure? cancel this order")
+    const confirmDialog = (id) => {
+        setCancelOrder(id);
+        setDialog(true);
+    }
+    const confirmCancelOrder = () => {
+        setDialog(false);
+        setSuccess(false);
+        setError(false);
+        setLoading(true);
+        axios.delete(`http://localhost:5000/orders/${cancelOrder}`)
+            .then(res => {
+                if (res) {
+                    setSuccess(true);
+                }
+            }).catch(error => {
+                setError(true);
+            }).finally(() => setLoading(false))
+
     }
     return (
         < Box >
-            <Grid container spacing={2}>
-                <Grid item xs={12} md={8}>
-                    <Paper elevation={0} sx={{ boxShadow: 3, width: 1, borderRadius: 5, p: { xs: 1, md: 3 } }}>
-
-                        {
-                            date.toLocaleDateString() === today.toLocaleDateString() ? "Today's " : date.toLocaleDateString()
-                        }
-                        {` Order`}
-
-                        <div style={{ height: 400, width: '100%', marginTop: 8 }}>
-                            <TableContainer component={Paper}>
-                                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell>#</TableCell>
-                                            <TableCell>Full Name</TableCell>
-                                            <TableCell>Product Name</TableCell>
-                                            <TableCell>Order Date</TableCell>
-                                            <TableCell>Status</TableCell>
-                                            <TableCell>Action</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {rows.map((row) => (
-                                            <TableRow
-                                                key={row.name}
-                                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                            >
-                                                <TableCell>{count++}</TableCell>
-                                                <TableCell>{row.name}</TableCell>
-                                                <TableCell>{row.calories}</TableCell>
-                                                <TableCell >{row.fat}</TableCell>
-                                                <TableCell >{row.carbs}</TableCell>
-                                                <TableCell><Button variant="contained" color="error" onClick={cancelOrder}>Cancel</Button></TableCell>
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-                        </div>
-                    </Paper>
-                </Grid>
-                <Grid item md={4}>
-                    <Calender date={date} setDate={setDate} />
-                </Grid>
-            </Grid>
+            {
+                loading && <Loading />
+            }
+            <Paper sx={{ p: 4 }}>
+                <Table>
+                    <Thead>
+                        <Tr style={{ textAlign: 'left' }}>
+                            <Th>#</Th>
+                            <Th>Name</Th>
+                            <Th>Product</Th>
+                            <Th>Order Date</Th>
+                            <Th>Total Cost</Th>
+                            <Th>Status</Th>
+                            <Th>Action</Th>
+                        </Tr>
+                    </Thead>
+                    <Tbody>
+                        {orders.map((order) => (
+                            <Tr key={order._id}>
+                                <Td>{count++}</Td>
+                                <Td>{order.name}</Td>
+                                <Td>{order.productName}</Td>
+                                <Td>{order.date}</Td>
+                                <Td >{order.totalCost}</Td>
+                                <Td >{order.status}</Td>
+                                <Td><Button variant="contained" color="error" onClick={() => confirmDialog(order._id)} sx={{ my: 1 }}>Cancel</Button></Td>
+                            </Tr>
+                        ))}
+                    </Tbody>
+                </Table>
+            </Paper>
+            <Dialog
+                open={dialog}
+                onClose={() => setDialog(false)}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"Cancel Order?"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Are you sure? cancel this order
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setDialog(false)}>No</Button>
+                    <Button onClick={confirmCancelOrder} variant="contained" sx={{ bgcolor: 'error.main' }}>
+                        Yes
+                    </Button>
+                </DialogActions>
+            </Dialog>
+            {
+                success && <Snackbar open={true} autoHideDuration={6000} onClose={() => setSuccess(false)}>
+                    <Alert onClose={() => setSuccess(false)} severity="success" sx={{ width: '100%' }}>
+                        Successfully  Cancel Order
+                    </Alert>
+                </Snackbar>
+            }
+            {
+                error && <Snackbar open={true} autoHideDuration={6000} onClose={() => setError(false)}>
+                    <Alert onClose={() => setError(false)} severity="error" sx={{ width: '100%' }}>
+                        An error occurred!
+                    </Alert>
+                </Snackbar>
+            }
         </Box >
     );
 };

@@ -28,3 +28,10 @@
     width: 100%;
     object-fit: cover;
 }
+
+.css-sox5kk-MuiBackdrop-root:focus-visible,
+.css-198qkhz:focus-visible,
+.css-3hcm5q:focus-visible,
+.css-ov3z8l-MuiMenuItem-root:focus-visible {
+    outline: none;
+}
