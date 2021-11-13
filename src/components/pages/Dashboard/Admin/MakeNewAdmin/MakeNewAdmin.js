@@ -18,7 +18,7 @@ const MakeNewAdmin = ({ setPage }) => {
 
     useEffect(() => {
         setLoading(true);
-        axios.get('http://localhost:5000/users')
+        axios.get('https://frozen-chamber-34165.herokuapp.com/users')
             .then(res => {
                 if (res.data) {
                     setUsers(res.data);
@@ -37,7 +37,7 @@ const MakeNewAdmin = ({ setPage }) => {
         setSuccess(false);
         setError(false);
         setLoading(true);
-        axios.put(`http://localhost:5000/users/admin/${admin}`)
+        axios.put(`https://frozen-chamber-34165.herokuapp.com/users/admin/${admin}`)
             .then(res => {
                 if (res) {
                     setSuccess(true);

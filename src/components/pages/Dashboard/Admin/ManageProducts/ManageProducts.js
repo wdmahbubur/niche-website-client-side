@@ -21,7 +21,7 @@ const ManageProducts = ({ setPage }) => {
 
     useEffect(() => {
         setLoading(true);
-        axios.get(`http://localhost:5000/products`)
+        axios.get(`https://frozen-chamber-34165.herokuapp.com/products`)
             .then(res => setProducts(res.data))
             .finally(() => setLoading(false))
     }, [success])
@@ -36,7 +36,7 @@ const ManageProducts = ({ setPage }) => {
         setSuccess(false);
         setError(false);
         setLoading(true);
-        axios.delete(`http://localhost:5000/products/${deleteProduct}`)
+        axios.delete(`https://frozen-chamber-34165.herokuapp.com/products/${deleteProduct}`)
             .then(res => {
                 if (res) {
                     setSuccess(true);

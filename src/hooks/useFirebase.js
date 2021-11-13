@@ -88,7 +88,7 @@ const useFirebase = () => {
     async function saveUser(uid, name, email) {
         setError();
         const user = { uid, name, email, role: "user" }
-        await axios.put('http://localhost:5000/users', {
+        await axios.put('https://frozen-chamber-34165.herokuapp.com/users', {
             data: user
         }).then(response => setError())
             .catch(error => {
@@ -97,7 +97,7 @@ const useFirebase = () => {
     }
 
     async function findUser(user) {
-        await axios.get(`http://localhost:5000/users/${user.uid}`)
+        await axios.get(`https://frozen-chamber-34165.herokuapp.com/users/${user.uid}`)
             .then(res => {
                 user.role = res.data.role || "user";
                 setUser(user)

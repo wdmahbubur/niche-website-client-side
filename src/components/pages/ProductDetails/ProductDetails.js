@@ -13,7 +13,7 @@ const ProductDetails = () => {
 
     useEffect(() => {
         setLoading(true)
-        axios.get(`http://localhost:5000/products/${params.productId}`)
+        axios.get(`https://frozen-chamber-34165.herokuapp.com/products/${params.productId}`)
             .then(res => {
                 setProduct(res.data);
             }).finally(() => setLoading(false));

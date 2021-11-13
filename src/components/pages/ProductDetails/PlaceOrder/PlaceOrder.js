@@ -46,7 +46,7 @@ const PlaceOrder = ({ productName, price, setLoading }) => {
         data.uid = user.uid;
         data.date = new Date().toLocaleDateString();
 
-        await axios.post('http://localhost:5000/orders', {
+        await axios.post('https://frozen-chamber-34165.herokuapp.com/orders', {
             data: data
         }).then(res => {
             if (res) {

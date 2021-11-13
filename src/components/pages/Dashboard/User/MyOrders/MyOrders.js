@@ -23,7 +23,7 @@ const MyOrders = ({ setPage }) => {
 
     useEffect(() => {
         setLoading(true);
-        axios.get(`http://localhost:5000/orders/${user.uid}`)
+        axios.get(`https://frozen-chamber-34165.herokuapp.com/orders/${user.uid}`)
             .then(res => setOrders(res.data))
             .finally(() => setLoading(false))
     }, [user.uid, success])
@@ -37,7 +37,7 @@ const MyOrders = ({ setPage }) => {
         setSuccess(false);
         setError(false);
         setLoading(true);
-        axios.delete(`http://localhost:5000/orders/${cancelOrder}`)
+        axios.delete(`https://frozen-chamber-34165.herokuapp.com/orders/${cancelOrder}`)
             .then(res => {
                 if (res) {
                     setSuccess(true);

@@ -34,7 +34,7 @@ const AddNewProduct = ({ setPage }) => {
         });
 
 
-        axios.post('http://localhost:5000/products', {
+        axios.post('https://frozen-chamber-34165.herokuapp.com/products', {
             data: data
         }).then(res => {
             if (res) {

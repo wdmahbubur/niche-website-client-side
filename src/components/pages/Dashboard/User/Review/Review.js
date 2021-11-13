@@ -28,7 +28,7 @@ const Review = ({ setPage }) => {
         data.photo = user.photoURL;
         data.ratting = ratting;
 
-        await axios.post('http://localhost:5000/review', {
+        await axios.post('https://frozen-chamber-34165.herokuapp.com/review', {
             data: data
         }).then(res => {
             if (res) {

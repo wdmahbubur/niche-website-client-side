@@ -20,13 +20,13 @@ const ManageAllOrders = ({ setPage }) => {
 
     useEffect(() => {
         setLoading(true);
-        axios.get(`http://localhost:5000/orders`)
+        axios.get(`https://frozen-chamber-34165.herokuapp.com/orders`)
             .then(res => setOrders(res.data))
             .finally(() => setLoading(false))
     }, [success])
 
     const approvedOrder = (id) => {
-        axios.put(`http://localhost:5000/orders/approved/${id}`)
+        axios.put(`https://frozen-chamber-34165.herokuapp.com/orders/approved/${id}`)
             .then(res => {
                 if (res) {
                     setSuccess(true);
@@ -45,7 +45,7 @@ const ManageAllOrders = ({ setPage }) => {
         setSuccess(false);
         setError(false);
         setLoading(true);
-        axios.delete(`http://localhost:5000/orders/${cancelOrder}`)
+        axios.delete(`https://frozen-chamber-34165.herokuapp.com/orders/${cancelOrder}`)
             .then(res => {
                 if (res) {
                     setSuccess(true);

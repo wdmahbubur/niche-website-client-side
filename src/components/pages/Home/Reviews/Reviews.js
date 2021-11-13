@@ -15,7 +15,7 @@ const Reviews = () => {
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         setLoading(true)
-        axios.get('http://localhost:5000/review')
+        axios.get('https://frozen-chamber-34165.herokuapp.com/review')
             .then(res => {
                 if (res.data) {
                     setReviews(res.data);

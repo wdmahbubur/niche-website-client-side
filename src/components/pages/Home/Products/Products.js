@@ -11,7 +11,7 @@ const Products = () => {
 
     useEffect(() => {
         setLoading(true);
-        axios.get('http://localhost:5000/products?size=6')
+        axios.get('https://frozen-chamber-34165.herokuapp.com/products?size=6')
             .then(res => {
                 setProducts(res.data)
                 setLoading(false);

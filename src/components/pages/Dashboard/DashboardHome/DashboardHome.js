@@ -24,11 +24,11 @@ const DashboardHome = ({ setPage }) => {
     useEffect(() => {
         setLoading(true);
         if (user.role === "admin") {
-            axios.get(`http://localhost:5000/orders`)
+            axios.get(`https://frozen-chamber-34165.herokuapp.com/orders`)
                 .then(res => setOrders(res.data))
                 .finally(() => setLoading(false))
         } else {
-            axios.get(`http://localhost:5000/orders/${user.uid}`)
+            axios.get(`https://frozen-chamber-34165.herokuapp.com/orders/${user.uid}`)
                 .then(res => setOrders(res.data))
                 .finally(() => setLoading(false))
         }

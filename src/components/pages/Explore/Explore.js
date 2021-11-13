@@ -11,7 +11,7 @@ const Explore = () => {
 
     useEffect(() => {
         setLoading(true);
-        axios.get('http://localhost:5000/products')
+        axios.get('https://frozen-chamber-34165.herokuapp.com/products')
             .then(res => setProducts(res.data))
             .finally(() => setLoading(false))
     }, [])
