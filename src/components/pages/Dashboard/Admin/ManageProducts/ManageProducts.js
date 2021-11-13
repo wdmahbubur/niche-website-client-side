@@ -90,7 +90,7 @@ const ManageProducts = ({ setPage }) => {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Are you sure? cancel this order
+                        Are you sure? delete this product
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
@@ -103,7 +103,7 @@ const ManageProducts = ({ setPage }) => {
             {
                 success && <Snackbar open={true} autoHideDuration={6000} onClose={() => setSuccess(false)}>
                     <Alert onClose={() => setSuccess(false)} severity="success" sx={{ width: '100%' }}>
-                        Successfully  Cancel Order
+                        Successfully  delete product
                     </Alert>
                 </Snackbar>
             }

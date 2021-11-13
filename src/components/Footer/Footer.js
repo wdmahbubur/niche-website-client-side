@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Grid, Typography, Link, Container, List, ListItem, ListItemText, TextField, Button } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import './Footer.css';
 import { NavHashLink } from 'react-router-hash-link';
+import axios from 'axios';
 
 const Footer = () => {
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        axios.get('https://frozen-chamber-34165.herokuapp.com/products?size=4')
+            .then(res => {
+                setProducts(res.data)
+            })
+    }, [])
     return (
         <Box sx={{ bgcolor: 'info.main', py: 5 }}>
             <Container>
@@ -27,54 +35,24 @@ const Footer = () => {
                             Our Latest Drone
                         </Typography>
                         <List sx={{ mt: 2, color: '#ddd', ml: { xs: 0, md: 5 } }}>
-                            <ListItem sx={{ pl: 0, py: .5 }}>
-                                <ListItemText sx={{ my: 0 }}>
-                                    <Link as={NavLink} to="/"
-                                        sx={{
-                                            minWidth: 100,
-                                            color: '#fff',
-                                            textDecoration: 'none',
-                                            fontWeight: 500,
-                                            fontSize: 16,
-                                            transition: 'all .4s linear',
-                                            ":hover": {
-                                                color: '#d1d1d1'
-                                            }
-                                        }}>Acer Drone E15</Link>
-                                </ListItemText>
-                            </ListItem>
-                            <ListItem sx={{ pl: 0, py: .5 }}>
-                                <ListItemText sx={{ my: 0 }}>
-                                    <Link as={NavLink} to="/"
-                                        sx={{
-                                            minWidth: 100,
-                                            color: '#fff',
-                                            textDecoration: 'none',
-                                            fontWeight: 500,
-                                            fontSize: 16,
-                                            transition: 'all .4s linear',
-                                            ":hover": {
-                                                color: '#d1d1d1'
-                                            }
-                                        }}>Acer Drone E15</Link>
-                                </ListItemText>
-                            </ListItem>
-                            <ListItem sx={{ pl: 0, py: .5 }}>
-                                <ListItemText sx={{ my: 0 }}>
-                                    <Link as={NavLink} to="/"
-                                        sx={{
-                                            minWidth: 100,
-                                            color: '#fff',
-                                            textDecoration: 'none',
-                                            fontWeight: 500,
-                                            fontSize: 16,
-                                            transition: 'all .4s linear',
-                                            ":hover": {
-                                                color: '#d1d1d1'
-                                            }
-                                        }}>Acer Drone E15</Link>
-                                </ListItemText>
-                            </ListItem>
+                            {
+                                products.map(product => <ListItem sx={{ pl: 0, py: .5 }} key={product._id}>
+                                    <ListItemText sx={{ my: 0 }}>
+                                        <Link as={NavLink} to={`/product/${product._id}`}
+                                            sx={{
+                                                minWidth: 100,
+                                                color: '#fff',
+                                                textDecoration: 'none',
+                                                fontWeight: 500,
+                                                fontSize: 16,
+                                                transition: 'all .4s linear',
+                                                ":hover": {
+                                                    color: '#d1d1d1'
+                                                }
+                                            }}>{product.productName}</Link>
+                                    </ListItemText>
+                                </ListItem>)
+                            }
                         </List>
                     </Grid>
                     <Grid item xs={12} md={3}>
