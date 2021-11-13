@@ -19,6 +19,7 @@ import MakeNewAdmin from './components/pages/Dashboard/Admin/MakeNewAdmin/MakeNe
 import Context from './context/context';
 import RequireAuth from './components/PrivateRoute/PrivateRoute';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+import NotFound from './components/pages/NotFound/NotFound';
 function App() {
   const [page, setPage] = useState("Dashboard");
 
@@ -51,8 +52,8 @@ function App() {
               <Route path="manage-products" element={<ManageProducts setPage={setPage} />} />
               <Route path="add-new-products" element={<AddNewProduct setPage={setPage} />} />
               <Route path="make-new-admin" element={<MakeNewAdmin setPage={setPage} />} />
-
             </Route>
+            <Route path="*" element={<NotFound />} />
 
           </Routes>
         </BrowserRouter>
